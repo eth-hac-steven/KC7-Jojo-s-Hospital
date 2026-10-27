@@ -23,103 +23,100 @@ locked byte
 secure-health-access.com
 
 
-Scenario
-JoJo's Hospital in Lexington, Kentucky, recently faced a serious cyberattack that locked their important files. The hackers sent a message to the hospital asking for money to unlock the files. They gave a specific amount of time to pay.
+`` Scenario ``
+
+*JoJo's Hospital in Lexington, Kentucky, recently faced a serious cyberattack that locked their important files. The hackers sent a message to the hospital asking for money to unlock the files. They gave a specific amount of time to pay.*
 
 ![rasmom-note](ransomnotes.png)
 
-Q1; How many hours did the hackers give the hospital to pay the ransom?
+#### Q1; How many hours did the hackers give the hospital to pay the ransom?
 
-A; 72 hrs
+**A; 72 hrs**
 
-The ransomware group left a bold name at the top of the note.
-Q2: What was the name of the ransomware group?
-A: Lock byte
-
-
-The ransomware group had a snarky and mean slogan:
-Q: The slogan was: we spend your money, so ____
-A: you dont have to 
+ *The ransomware group left a bold name at the top of the note.*
+#### Q2: What was the name of the ransomware group?
+**A: Lock byte**
 
 
-Not only did the hackers ask the hospital for money, but they also sent scary emails to patients. They asked patients to pay money too, or their personal information would be shared.
+*The ransomware group had a snarky and mean slogan:*
+#### Q: The slogan was: we spend your money, so ____
+**A: you dont have to**
 
 
+*Not only did the hackers ask the hospital for money, but they also sent scary emails to patients. They asked patients to pay money too, or their personal information would be shared.*
 
-Q: How much did the hackers ask the patients to pay?
+#### Q: How much did the hackers ask the patients to pay?
 
-A:10000
+**A:10000**
 
-Q: What very important unique identifier number did the ransomware operators threaten to release?
+#### Q: What very important unique identifier number did the ransomware operators threaten to release?
 
-A : Social security number
+**A : Social security number**
 
-Q: How many total files were encrypted at the hospital?
-A: 6420
+#### Q: How many total files were encrypted at the hospital?
+**A: 6420**
 
-Q: How many unique hostnames had files encrypted on them?
-A : 321
+#### Q: How many unique hostnames had files encrypted on them?
+**A : 321**
 
-
-Q: What was the Sha256 hash of this ransom file?
-A: 97c348e95c8a8aeb8808f76434d73a92bbcb6b4586788365762b22624990b018
-
-
-Q:What was the full path of this ransom file?
-
-A: C:\\Users\\andavis\\Documents\\We_Have_Your_Data_Pay_Up.txt
+#### Q: What was the Sha256 hash of this ransom file?
+**A: 97c348e95c8a8aeb8808f76434d73a92bbcb6b4586788365762b22624990b018**
 
 
-Q: On how many hosts (machines) was this ransom file seen?
-A: 1
+#### Q:What was the full path of this ransom file?
 
-This ransom note is a major clue! We can use it to figure out how the ransom might have happened.
-
-What hostname was the ransom note seen on?
-
-AMFB-MACHINE
+**A: C:\\Users\\andavis\\Documents\\We_Have_Your_Data_Pay_Up.txt**
 
 
-Great, now that we know what hostname the file was seen on. We can figure out who it belongs to!
+#### Q: On how many hosts (machines) was this ransom file seen?
+**A: 1**
 
-Q: What is the name of the employee whose host has the ransom note?
+*This ransom note is a major clue! We can use it to figure out how the ransom might have happened.*
 
-A: Anthony Davis
+#### What hostname was the ransom note seen on?
+
+**AMFB-MACHINE**
 
 
-Run the query above. How many process events were executed on Anthony's machine during this time period?
+*Great, now that we know what hostname the file was seen on. We can figure out who it belongs to!*
 
-ans 14
+#### Q: What is the name of the employee whose host has the ransom note?
 
-Let's read through the commands in the process_commandline column from the top down. Make sure you are sorting by time.
+**A: Anthony Davis**
 
-One of the command mentions a "ransomer". That's VERY suspicious!
+#### Q : How many process events were executed on Anthony's machine during this time period?
 
-What was the name of the ransomer file mentioned?
+**A : 14**
 
- lockbyte_ransomer.exe
+*Let's read through the commands in the process_commandline column from the top down. Make sure you are sorting by time.*
+
+*One of the command mentions a "ransomer". That's VERY suspicious!*
+
+#### What was the name of the ransomer file mentioned?
+
+**A : lockbyte_ransomer.exe**
 
 
 
-When the attackers copied the ransomer file to the network share, what new name did they give it?
+#### When the attackers copied the ransomer file to the network share, what new name did they give it?
 
- spread_ransomware.exe
+**A : spread_ransomware.exe**
 
 
 
-If we keep looking down in the data, we can see that the hackers actually stole some data from the hospital as well 😱
+*If we keep looking down in the data, we can see that the hackers actually stole some data from the hospital as well 😱*
 
-What tool did the attackers use to steal the data? This will be a .exe file
+### What tool did the attackers use to steal the data? This will be a .exe file
 
- patient_data_exporter.exe
+**A ; patient_data_exporter.exe**
 
-We let the bosses know that the attackers actually stole some files. They were not at all thrilled to hear that. They want to know what the attackers actually stole.
+*We let the bosses know that the attackers actually stole some files. They were not at all thrilled to hear that. They want to know what the attackers actually stole.*
 
-The attackers stole files that they put into three zip files.
+*The attackers stole files that they put into three zip files.*
 
-What information did the attackers put into patient_data_1.zip? Provide the full path of the network share \\something\like\this
+#### Q :What information did the attackers put into patient_data_1.zip? Provide the full path of the network share \\something\like\this
 
- \\jojos-hospital-server\important_data\patient_records
+**A:  \\jojos-hospital-server\important_data\patient_records**
 
 
 
