@@ -5,6 +5,7 @@ Jojo's Hospital, a cornerstone of Lexington's healthcare system, faces a critica
 KC7-Jojo's Hospital: A Ransomware Investigation
 desc: Jojo's Hospital, a cornerstone of Lexington's healthcare system, faces a critical crisis
 
+### user of interest
 ```
 {
   "hire_date": "2022-06-15 00:00:00+00:00",
@@ -18,9 +19,10 @@ desc: Jojo's Hospital, a cornerstone of Lexington's healthcare system, faces a c
   "hostname": "AMFB-MACHINE"
 }
 ```
-locked byte
-2 million
-secure-health-access.com
+#### Side note
+- locked byte
+- 2 million
+- secure-health-access.com
 
 
 `` Scenario ``
@@ -120,151 +122,144 @@ secure-health-access.com
 
 
 
-What information did the attackers put into patient_data_2.zip? Provide the full path of the network share \\something\like\this
+#### Q : What information did the attackers put into patient_data_2.zip? Provide the full path of the network share \\something\like\this
 
- \\jojos-hospital-server\important_data\archive\patient-records
+ **A:\\jojos-hospital-server\important_data\archive\patient-records**
 
-What information did the attackers put into patient_data_3.zip? Provide the full path of the network share \\something\like\this
+#### Q : What information did the attackers put into patient_data_3.zip? Provide the full path of the network share \\something\like\this
 
- \\jojos-hospital-server\important_data\old-patient-data
+ **A : \\jojos-hospital-server\important_data\old-patient-data**
 
 
-What domain (e.g. abcd.com) did the attackers send the stolen data to?
+#### Q : What domain (e.g. abcd.com) did the attackers send the stolen data to?
 
- secure-health-access.com
+ **A : secure-health-access.com**
 
-What command did they use to clear their tracks? Copy and paste the full command.
+#### Q : What command did they use to clear their tracks? Copy and paste the full command.
 
- cmd.exe /c del C:\Users\andavis\Documents\patient_data_*.zip
+ **A : cmd.exe /c del C:\Users\andavis\Documents\patient_data_*.zip**
 
 
+#### Q: What domain was the patient data exporter file downloaded from?
 
+ **A :secure-health-access.com**
 
 
+#### Q : When was the patient data exporter file downloaded? (copy and paste the exact timestamp)
 
+ **A: 2024-06-17T14:22:29Z**
 
-What domain was the patient data exporter file downloaded from?
+#### Q : How many distinct IPs does the domain secure-health-access.com resolve to?
 
- secure-health-access.com
+**A: 2**
 
 
-When was the patient data exporter file downloaded? (copy and paste the exact timestamp)
+#### Q: Which one of these IPs ends with the digit 1?
 
- 2024-06-17T14:22:29Z
+**A :203.0.113.1**
 
-How many distinct IPs does the domain secure-health-access.com resolve to?
+#### Q: Which one of these IPs ends with the digit 1?
 
- 2
+**A :203.0.113.2**
 
+#### Q: What additional domain name is associated with these IP addresses?
 
-Which one of these IPs ends with the digit 1?
+**A : emr-help.net**
 
-203.0.113.1
 
-Which one of these IPs ends with the digit 1?
+*let's take the actor IPs we found and look for any reconnaissance they conducted against the hospital website. InboundNetworkEvents contains information about browsing to our website.*
 
-203.0.113.2
+#### Q: How many requests did the hackers make to our website from these IPs?
 
-What additional domain name is associated with these IP addresses?
+ **A :37**
 
-emr-help.net
+#### Q: The hackers were curious about how to bypass ___ at Jojo's hospital.
 
+**A :security**
 
+#### Q: What was the first web request the hackers made using the term patient? (hint: it was a search). Paste the full url.
 
+**A :https://jojoshospital.org/search=JoJo%27s+Hospital+patient+records**
 
-let's take the actor IPs we found and look for any reconnaissance they conducted against the hospital website. InboundNetworkEvents contains information about browsing to our website.
+#### Q: When did this login occur?
 
-How many requests did the hackers make to our website from these IPs?
+**A :2024-05-20 00:00:00**
 
- 37
 
-The hackers were curious about how to bypass ___ at Jojo's hospital.
+#### Q: Which IP address did the actors use for the login?
 
- security
+**A :203.0.113.1**
 
-What was the first web request the hackers made using the term patient? (hint: it was a search). Paste the full url.
 
-https://jojoshospital.org/search=JoJo%27s+Hospital+patient+records
+#### Q: Whose account did the hackers login to? (provide a first and last name)
 
-When did this login occur?
+ **A : Anthony Davis**
 
-2024-05-20 00:00:00
+#### Q: Whose credentials did the hackers use to access the hospital's network? (Enter first and last name)
 
+**A : Anthony Davis**
 
-Which IP address did the actors use for the login?
 
-203.0.113.1
+#### Q: What was the domain name observed in the sponsored search result?
 
+**A :raisinkanes.com**
 
-Whose account did the hackers login to? (provide a first and last name)
+#### Q: What is the legitimate domain for Raising Cane's?
 
- Anthony Davis
+**A :raisingcanes.com**
 
-Whose credentials did the hackers use to access the hospital's network? (Enter first and last name)
 
-Anthony Davis
+#### Q: How many web requests do we see going to the fake raisinkanes domain?
 
+**A :26**
 
-What was the domain name observed in the sponsored search result?
+#### Q: How many unique employees were seen browsing to the fake raisinkanes domains? (hint distinct the src_ip)
 
-raisinkanes.com
+**A :24**
 
-What is the legitimate domain for Raising Cane's?
 
-raisingcanes.com
+*When staff clicked on the fake advertisement, it took them to a harmful website. This website had a malicious URL.*
 
+#### Q: Which of the malicious domains used for redirection starts with the word "nothing"?
 
-How many web requests do we see going to the fake raisinkanes domain?
+**A :nothing-to-see-here.net**
 
-26
+#### Q:Which of the malicious domains used for redirection starts with the word "totally"?
 
-How many unique employees were seen browsing to the fake raisinkanes domains? (hint distinct the src_ip)
+ **A :totally-legit-domain.com**
 
-24
+*Now we must wonder what happens when the employees click on those suspicious domains and are redirected.*
 
+*Looks like they are forced to download some suspicious files.*
 
-When staff clicked on the fake advertisement, it took them to a harmful website. This website had a malicious URL.
+#### Q: What is the name of the docx file they are redirected to?
 
-Which of the malicious domains used for redirection starts with the word "nothing"?
+**A :Raisin_Kane_Promo_Offer.docx**
 
-nothing-to-see-here.net
+#### Q: What is the name of the pdf file they are redirected to?
 
-Which of the malicious domains used for redirection starts with the word "totally"?
+ **A :Raisin_Kane_Free_Meal_Voucher.pdf**
 
- totally-legit-domain.com
+#### Q: What is the hostname of the first person to download the suspicious docx file?
 
-Now we must wonder what happens when the employees click on those suspicious domains and are redirected.
+ **A :RQJQ-MACHINE**
 
-Looks like they are forced to download some suspicious files.
+#### Q: When did this download occur? (copy and paste the timestamp)
 
-What is the name of the docx file they are redirected to?
+ **A :2024-05-01T09:56:50Z**
 
-Raisin_Kane_Promo_Offer.docx
+#### Q: What was the Sha256 hash of the file?
 
-What is the name of the pdf file they are redirected to?
+**A :bd886046266b909a8ca5f19f16e5606baf73194a70632c81fdc44ef39ba29712**
 
- Raisin_Kane_Free_Meal_Voucher.pdf
+#### Q: Which browser was used to download this file? (look at the process_name)
 
-What is the hostname of the first person to download the suspicious docx file?
+ **A :chrome**
 
- RQJQ-MACHINE
+#### Q: What was the name of the malicious file dropped by the attackers?
 
-When did this download occur? (copy and paste the timestamp)
+**A :cobaltstrike.exe**
 
- 2024-05-01T09:56:50Z
+#### Q: What IP address do the hackers connect to using cobalt strike?
 
-What was the Sha256 hash of the file?
-
-bd886046266b909a8ca5f19f16e5606baf73194a70632c81fdc44ef39ba29712
-
-Which browser was used to download this file? (look at the process_name)
-
- chrome
-
-What was the name of the malicious file dropped by the attackers?
-
-cobaltstrike.exe
-
-What IP address do the hackers connect to using cobalt strike?
-
- 93.238.22.122
+ **A :93.238.22.122**
