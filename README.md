@@ -29,7 +29,7 @@ desc: Jojo's Hospital, a cornerstone of Lexington's healthcare system, faces a c
 
 *JoJo's Hospital in Lexington, Kentucky, recently faced a serious cyberattack that locked their important files. The hackers sent a message to the hospital asking for money to unlock the files. They gave a specific amount of time to pay.*
 
-![rasmom-note](ransomnotes.png)
+![rasmom-note](images/ransomnotes.png)
 
 #### Q1; How many hours did the hackers give the hospital to pay the ransom?
 
@@ -47,6 +47,8 @@ desc: Jojo's Hospital, a cornerstone of Lexington's healthcare system, faces a c
 
 *Not only did the hackers ask the hospital for money, but they also sent scary emails to patients. They asked patients to pay money too, or their personal information would be shared.*
 
+![rasmom-note](images/ransomnotes%20to%20patients.png)
+
 #### Q: How much did the hackers ask the patients to pay?
 
 **A:10000**
@@ -56,10 +58,36 @@ desc: Jojo's Hospital, a cornerstone of Lexington's healthcare system, faces a c
 **A : Social security number**
 
 #### Q: How many total files were encrypted at the hospital?
+
+![locked-files](images/encrypted%20file.png)
+
 **A: 6420**
 
 #### Q: How many unique hostnames had files encrypted on them?
+
+![locked-files](images/host%20sys%20with%20enc%20file.png)
+
 **A : 321**
+
+*This ransom note is a major clue! We can use it to figure out how the ransom might have happened.*
+
+![locked-files](images/left%20behind%20ransom%20note.png)
+
+#### What hostname was the ransom note seen on?
+
+**AMFB-MACHINE**
+
+
+*Great, now that we know what hostname the file was seen on. We can figure out who it belongs to!*
+
+#### Q: What is the name of the employee whose host has the ransom note?
+
+```
+Employees
+| where hostname == "AMFB-MACHINE"
+```
+
+**A: Anthony Davis**
 
 #### Q: What was the Sha256 hash of this ransom file?
 **A: 97c348e95c8a8aeb8808f76434d73a92bbcb6b4586788365762b22624990b018**
@@ -73,18 +101,6 @@ desc: Jojo's Hospital, a cornerstone of Lexington's healthcare system, faces a c
 #### Q: On how many hosts (machines) was this ransom file seen?
 **A: 1**
 
-*This ransom note is a major clue! We can use it to figure out how the ransom might have happened.*
-
-#### What hostname was the ransom note seen on?
-
-**AMFB-MACHINE**
-
-
-*Great, now that we know what hostname the file was seen on. We can figure out who it belongs to!*
-
-#### Q: What is the name of the employee whose host has the ransom note?
-
-**A: Anthony Davis**
 
 #### Q : How many process events were executed on Anthony's machine during this time period?
 
